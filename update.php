@@ -16,6 +16,7 @@
             background-color: #222;
             color: white;
             font-family: Arial, sans-serif;
+            background-color: #0b69dd;
         }
 
         button {
@@ -46,18 +47,15 @@
             overflow: auto;
         }
 
-        main {
-            background-color: #0b69dd;
-        }
     </style>
 </head>
 
 <body>
-    <main>
+
         <form method="POST">
             <button type="submit" name="update">UPDATE WEBSITE</button>
         </form>
-    </main>
+        
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<pre>" . shell_exec('cd C:/xampp/htdocs/onlymok && git pull origin main 2>&1') . "</pre>";
