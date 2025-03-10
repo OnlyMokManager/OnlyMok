@@ -54,7 +54,7 @@ a {
     color: white;
 }
 
-img {
+.logo {
     width: 250px;
     height: 100px;
     margin-bottom: 20px;
@@ -113,4 +113,35 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.productImage{
+    width: 400px;
+    height: 350px;
+    margin-bottom: 20px;
+}
+
+.product{
+    background-color: #0b69dd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aankoopKnop{
+    background-color: #006400;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.aankoopKnop:hover {
+    background-color: #228B22;
 }
