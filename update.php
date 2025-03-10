@@ -16,13 +16,13 @@
             background-color: #222;
             color: white;
             font-family: Arial, sans-serif;
-            background-color: #0b69dd;
+            background-color: #0793e9;
         }
 
         button {
-            font-size: 32px;
+            font-size: 48px;
             padding: 20px 40px;
-            background-color: #28a745;
+            background-color:rgb(11, 98, 204);
             color: white;
             border: none;
             cursor: pointer;
@@ -31,17 +31,17 @@
         }
 
         button:hover {
-            background-color: #218838;
+            background-color:rgb(10, 91, 189);
         }
 
         pre {
+            background-color: #6caeff;
             font-size: 18px;
-            color: #ddd;
+            color: #222;
             white-space: pre-wrap;
             text-align: left;
             width: 80%;
             max-width: 800px;
-            background: #333;
             padding: 15px;
             border-radius: 5px;
             overflow: auto;
@@ -55,7 +55,7 @@
         <form method="POST">
             <button type="submit" name="update">UPDATE WEBSITE</button>
         </form>
-        
+
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<pre>" . shell_exec('cd C:/xampp/htdocs/onlymok && git pull origin main 2>&1') . "</pre>";
