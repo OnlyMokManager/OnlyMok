@@ -50,7 +50,7 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "<pre>" . shell_exec('cd C:/xampp/htdocs/mywebsite && git pull origin main 2>&1') . "</pre>";
+    echo "<pre>" . shell_exec('cd C:/xampp/htdocs/onlymok && git pull origin main 2>&1') . "</pre>";
 }
 ?>
 

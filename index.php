@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <img class="logo" src="onlymoklogo.png" alt="OnlyMok logo">
         <div class="login-box"></div>
         <form class="login-form" method="POST" action="">
-            <label for="username">Usernapmwe:</label>
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username">
-            <label for="password">Password:</label>
+            <label for="passworsigmad">Password:</label>
             <input type="password" id="password" name="password">
             <button class="login-button" type="submit">Login</button>
         </form>
