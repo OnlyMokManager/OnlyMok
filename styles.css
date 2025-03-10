@@ -51,6 +51,11 @@ nav {
     margin-right: 10px;
 }
 
+.login-button:hover {
+    background-color: #4f9eff;
+}
+
+
 img {
     width: 250px;
     height: 100px;
