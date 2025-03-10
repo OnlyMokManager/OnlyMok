@@ -2,7 +2,7 @@
 
 // defined in 'variables.env'
 $db_host = 'localhost'; // de database server 
-$db_name = 'onlymok';  // naam van database
+$db_name = 'onlymoknl';  // naam van database
 
 // defined in sql-script 'movies.sql'
 $db_user    = 'sa';                 // db user
