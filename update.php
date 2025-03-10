@@ -1,3 +1,12 @@
+<?php
+$allowed_key = "enzo"; // Set your password
+
+// Check if the correct password is in the URL
+if (!isset($_GET['key']) || $_GET['key'] !== $allowed_password) {
+    die("<h1 style='color: red; text-align: center;'>ACCESS DENIED</h1>");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,16 +22,15 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background-color: #222;
+            background-color: #0793e9;
             color: white;
             font-family: Arial, sans-serif;
-            background-color: #0793e9;
         }
 
         button {
             font-size: 48px;
             padding: 20px 40px;
-            background-color:rgb(11, 98, 204);
+            background-color: rgb(11, 98, 204);
             color: white;
             border: none;
             cursor: pointer;
@@ -31,7 +39,7 @@
         }
 
         button:hover {
-            background-color:rgb(10, 91, 189);
+            background-color: rgb(10, 91, 189);
         }
 
         pre {
@@ -46,15 +54,14 @@
             border-radius: 5px;
             overflow: auto;
         }
-
     </style>
 </head>
 
 <body>
 
-        <form method="POST">
-            <button type="submit" name="update">UPDATE WEBSITE</button>
-        </form>
+    <form method="POST">
+        <button type="submit" name="update">Update Website</button>
+    </form>
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
