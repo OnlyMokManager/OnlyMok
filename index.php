@@ -6,13 +6,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username');
+    $user = $connect->prepare('SELECT id, username, [password] FROM users WHERE username = :username');
     $user->execute(['username' => $username]);
 
     if ($user->rowCount() > 0) {
         $userData = $user->fetch(PDO::FETCH_ASSOC);
         var_dump($userData);
-        header('Location: /shop.html');
     }
 }
 ?>
