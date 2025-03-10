@@ -16,10 +16,10 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
+img {
+    width: 250px;
+    height: 100px;
     margin-bottom: 20px;
-    color: white;
 }
 
 p {
