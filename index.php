@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user->rowCount() > 0) {
         $_SESSION['user'] = $user->fetch(PDO::FETCH_ASSOC)['id'];
         header('Location: /shop.html');
+        echo "Invasword.";
         exit();
     } else {
         echo "Invalid username or password.";
