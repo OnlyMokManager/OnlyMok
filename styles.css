@@ -22,9 +22,8 @@ nav {
     border-radius: 10px;
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: top;
-    align-items: center;
 }
 
 
