@@ -115,9 +115,16 @@ input {
     align-items: center;
 }
 
+.winkelSectie{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;     
+    grid-row: auto;
+}
+
 .productImage{
-    width: 400px;
-    height: 350px;
+    width: 250px;
+    height: 200px;
     margin-bottom: 20px;
 }
 
@@ -127,7 +134,7 @@ input {
     border-radius: 10px;
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
