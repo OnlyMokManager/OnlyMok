@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user->rowCount() > 0) {
         $userData = $user->fetch(PDO::FETCH_ASSOC);
         var_dump($userData);
+        exit();
     }
 }
 ?>
