@@ -6,17 +6,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username AND password = :password');
-    $user->execute(['username' => $username, 'password' => $password]);
+    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username');
+    $user->execute(['username' => $username]);
 
     if ($user->rowCount() > 0) {
-        $_SESSION['user'] = $user->fetch(PDO::FETCH_ASSOC)['id'];
-        header('Location: /shop.html');
-        echo "Invasword.";
-        exit();
+        $userData = $user->fetch(PDO::FETCH_ASSOC);
+        if ($password === $userData['password']) {
+            $_SESSION['user'] = $userData['id'];
+            header('Location: /shop.html');
+            exit();
+        } else {
+            echo "Invalid username or password.";
+        }
     } else {
         echo "Invalid username or password.";
-    }    
+    }
 }
 ?>
 
