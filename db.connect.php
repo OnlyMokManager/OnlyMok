@@ -1,7 +1,7 @@
 <?php
 
 // defined in 'variables.env'
-$db_host = '84.82.1.158'; // de database server 
+$db_host = 'localhost'; // de database server 
 $db_name = 'onlymok';  // naam van database
 
 // defined in sql-script 'movies.sql'
@@ -15,7 +15,7 @@ $connect = new PDO('sqlsrv:Server=' . $db_host . ';Database=' . $db_name . ';Con
 unset($db_password);
 
 // Zorg ervoor dat eventuele fouttoestanden ook echt als fouten (exceptions) gesignaleerd worden door PHP.
-$verbinding->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Functie om in andere files toegang te krijgen tot de verbinding.
 function makeConnection()
