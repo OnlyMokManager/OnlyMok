@@ -11,15 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user->rowCount() > 0) {
         $userData = $user->fetch(PDO::FETCH_ASSOC);
-        if ($password === $userData['password']) {
-            $_SESSION['user'] = $userData['id'];
-            header('Location: /shop.html');
-            exit();
-        } else {
-            echo "Invalid username or password.";
-        }
-    } else {
-        echo "Invalid username or password.";
+        var_dump($userData);
     }
 }
 ?>
