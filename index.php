@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username AND password = :password');
     $user->execute(['username' => $username, 'password' => $password]);
 
-    if ($query->rowCount() > 0) {
-        $_SESSION['user'] = $query['id'];
+    if ($user->rowCount() > 0) {
+        $_SESSION['user'] = $user->fetch(PDO::FETCH_ASSOC)['id'];
         header('Location: shop.html');
         exit();
-    }
+    }    
 }
 ?>
 
