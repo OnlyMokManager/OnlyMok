@@ -1,9 +1,8 @@
 <?php
-$allowed_key = "enzo"; // Set your password
+$allowed_key = "enzo";
 
-// Check if the correct password is in the URL
 if (!isset($_GET['key']) || $_GET['key'] !== $allowed_password) {
-    die("<h1 style='color: red; text-align: center;'>ACCESS DENIED</h1>");
+    die("<h1 style='color: blue; text-align: center;'>ACCESS DENIED YOUR IP WILL BE SEND TO THE FBI AND THEY WILL AREST YOU UNDER LAW OR SMTH IDK</h1>");
 }
 ?>
 
