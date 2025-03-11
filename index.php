@@ -1,23 +1,34 @@
 <?php
- require 'db.connect.php';
- session_start();
- 
- if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-     $username = $_POST['username'];
-     $password = $_POST['password'];
+require 'db.connect.php';
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
     echo 'Username: ' . $username . '<br>';
     echo 'Password: ' . $password . '<br>';
 
-     $user = $connect->prepare('SELECT id, username, [password] FROM users WHERE username = :username');
-     $user->execute(['username' => $username]);
- 
-     if ($user->rowCount() > 0) {
-         $userData = $user->fetch(PDO::FETCH_ASSOC);
-         var_dump($userData);
-         exit();
-     }
- }
- ?>
+    // Check if the username and password are not empty
+    if (empty($username) || empty($password)) {
+        echo 'Username or password is empty.<br>';
+        exit();
+    }
+
+    // Prepare and execute the SQL query
+    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username');
+    $user->execute(['username' => $username]);
+
+    // Check if the query returned any results
+    if ($user->rowCount() > 0) {
+        $userData = $user->fetch(PDO::FETCH_ASSOC);
+        echo 'User data fetched successfully.<br>';
+        var_dump($userData);
+        exit(); // Ensure the script stops execution so you can see the var_dump output
+    } else {
+        echo 'Invalid username or password.<br>';
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
