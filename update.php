@@ -4,6 +4,18 @@ $allowed_key = "enzo";
 if (!isset($_GET['key']) || $_GET['key'] !== $allowed_key) {
     die("<h1 style='color: blue; text-align: center;'>ACCESS DENIED YOUR IP WILL BE SEND TO THE FBI AND THEY WILL AREST YOU UNDER LAW OR SMTH IDK</h1>");
 }
+
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['update'])) {
+        echo "<pre>" . shell_exec('cd C:/xampp/htdocs && git pull origin main 2>&1') . "</pre>";
+    } elseif (isset($_POST['logout'])) {
+        session_unset();
+        session_destroy();
+        echo "<p>All sessions have been removed.</p>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,13 +73,8 @@ if (!isset($_GET['key']) || $_GET['key'] !== $allowed_key) {
 
     <form method="POST">
         <button type="submit" name="update">Update Website</button>
+        <button type="submit" name="logout">Logout</button>
     </form>
-
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo "<pre>" . shell_exec('cd C:/xampp/htdocs && git pull origin main 2>&1') . "</pre>";
-    }
-    ?>
 
 </body>
 

@@ -3,52 +3,29 @@ require 'db.connect.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo 'POST request received.<br>';
     if (isset($_POST['login'])) {
-        echo 'Login button clicked.<br>';
         $username = $_POST['username'];
         $password = $_POST['password'];
-        echo 'Username: ' . $username . '<br>';
-        echo 'Password: ' . $password . '<br>';
 
         $db = startConnection();
-        if ($db) {
-            echo 'Database connection successful.<br>';
-        } else {
-            echo 'Database connection failed.<br>';
-        }
-
         $sql = 'SELECT username, [password] FROM [Users] WHERE username = :username';
         $query = $db->prepare($sql);
-        echo 'SQL query prepared.<br>';
 
         $data_array = [
             ':username' => htmlspecialchars($username)
         ];
         $query->execute($data_array);
-        echo 'SQL query executed.<br>';
 
         if ($user = $query->fetch()) {
-            echo 'User found.<br>';
             $connectedPassword = $user['password'];
-            echo 'Connected password: ' . $connectedPassword . '<br>';
 
             if ($password === $connectedPassword) {
-                echo 'Password matches.<br>';
                 $_SESSION['gebruiker'] = $username;
                 header('Location: /shop.html');
                 exit();
-            } else {
-                echo 'Password does not match.<br>';
             }
-        } else {
-            echo 'User not found.<br>';
         }
-    } else {
-        echo 'Login button not clicked.<br>';
     }
-} else {
-    echo 'Not a POST request.<br>';
 }
 ?>
 
