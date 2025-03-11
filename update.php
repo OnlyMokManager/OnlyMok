@@ -13,6 +13,7 @@ if (!isset($_GET['key']) || $_GET['key'] !== $allowed_key) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Website</title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -64,7 +65,7 @@ if (!isset($_GET['key']) || $_GET['key'] !== $allowed_key) {
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo "<pre>" . shell_exec('cd C:/xampp/htdocs/onlymok && git pull origin main 2>&1') . "</pre>";
+        echo "<pre>" . shell_exec('cd C:/xampp/htdocs && git pull origin main 2>&1') . "</pre>";
     }
     ?>
 
