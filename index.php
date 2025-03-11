@@ -3,14 +3,12 @@ require 'db.connect.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $success = '';
-
     if (isset($_POST['login'])) {
         $naam = $_POST['innaam'];
         $wachtwoord = $_POST['inwachtwoord'];
 
-        $db = maakVerbinding();
-        $sql = 'SELECT password FROM [User] WHERE username = :naam';
+        $db = startConnection();
+        $sql = 'SELECT id, username, [password] FROM [Users] WHERE username = :naam';
         $query = $db->prepare($sql);
 
         $data_array = [
@@ -22,14 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $passwordhash = $rij['password'];
 
             if (password_verify($wachtwoord, $passwordhash)) {
-
                 $_SESSION['gebruiker'] = $naam;
-                $success = 'Gebruiker is ingelogd.';
+                header('Location: /shop.html');
+                exit();
             } else {
-                $success = 'Fout: onjuiste inloggegevens!';
+                echo 'Fout: onjuiste inloggegevens!';
             }
         } else {
-            $success = 'Onjuiste inloggegevens.';
+            echo 'Onjuiste inloggegevens.';
         }
     }
 }
@@ -55,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" id="username" name="username">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
-            <button class="login-button" type="submit">Login</button>
+            <button class="login-button" type="submit" name="login">Login</button>
         </form>
     </main>
 </body>
