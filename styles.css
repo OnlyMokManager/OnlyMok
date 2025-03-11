@@ -80,6 +80,12 @@ footer {
     box-shadow: 0 -2px 5px black;
 }
 
+footer p {
+    color: white;
+    align-self: center;
+    margin: 0;
+}
+
 .logo {
     width: 250px;
     height: auto;
