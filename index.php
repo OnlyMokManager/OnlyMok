@@ -4,30 +4,26 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['login'])) {
-        $naam = $_POST['innaam'];
-        $wachtwoord = $_POST['inwachtwoord'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
         $db = startConnection();
-        $sql = 'SELECT id, username, [password] FROM [Users] WHERE username = :naam';
+        $sql = 'SELECT username, [password] FROM [Users] WHERE username = :username';
         $query = $db->prepare($sql);
 
         $data_array = [
-            ':naam' => htmlspecialchars($naam)
+            ':username' => htmlspecialchars($username)
         ];
         $query->execute($data_array);
 
-        if ($rij = $query->fetch()) {
-            $passwordhash = $rij['password'];
+        if ($user = $query->fetch()) {
+            $connectedPassword = $user['password'];
 
-            if (password_verify($wachtwoord, $passwordhash)) {
-                $_SESSION['gebruiker'] = $naam;
+            if ($password === $connectedPassword) {
+                $_SESSION['gebruiker'] = $username;
                 header('Location: /shop.html');
                 exit();
-            } else {
-                echo 'Fout: onjuiste inloggegevens!';
             }
-        } else {
-            echo 'Onjuiste inloggegevens.';
         }
     }
 }
