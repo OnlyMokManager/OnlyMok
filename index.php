@@ -15,8 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare and execute the SQL query to fetch the user data based on the username and password
-    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username AND password = :password');
+    $sql = 'SELECT id, username, password FROM users WHERE username = :username AND password = :password';
+    $user = $connect->prepare($sql);
     $user->execute(['username' => $username, 'password' => $password]);
+
+    // Print the executed SQL query for debugging
+    echo 'Executed SQL query: ' . $sql . '<br>';
+    echo 'With parameters: username=' . $username . ', password=' . $password . '<br>';
 
     // Check if the query returned any results
     if ($user->rowCount() > 0) {
