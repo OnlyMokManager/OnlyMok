@@ -14,15 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Prepare and execute the SQL query to fetch all data from users table
-    $users = $connect->prepare('SELECT * FROM users');
-    $users->execute();
+    // Prepare and execute the SQL query to fetch the user data based on the username and password
+    $user = $connect->prepare('SELECT id, username, password FROM users WHERE username = :username AND password = :password');
+    $user->execute(['username' => $username, 'password' => $password]);
 
-    // Fetch all user data
-    $allUsers = $users->fetchAll(PDO::FETCH_ASSOC);
-    echo 'All user data fetched successfully.<br>';
-    var_dump($allUsers);
-    exit(); // Ensure the script stops execution so you can see the var_dump output
+    // Check if the query returned any results
+    if ($user->rowCount() > 0) {
+        $userData = $user->fetch(PDO::FETCH_ASSOC);
+        echo 'User data fetched successfully.<br>';
+        var_dump($userData);
+        $_SESSION['user'] = $userData['id'];
+        header('Location: /shop.html');
+        exit();
+    } else {
+        echo 'Invalid username or password.<br>';
+    }
 }
 ?>
 
