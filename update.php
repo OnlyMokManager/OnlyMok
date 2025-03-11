@@ -104,9 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" class="button-container">
         <button type="submit" name="update">Update Website</button>
         <button type="submit" name="logout">Unset Sessions</button>
-        <button type="button">Button 3</button>
-        <button type="button">Button 4</button>
-        <button type="button">Button 5</button>
+        <button type="button">...</button>
+        <button type="button">...</button>
+        <button type="button">...</button>
     </form>
 
     <div class="info-box">
