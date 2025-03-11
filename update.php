@@ -88,6 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 5px;
             overflow: auto;
         }
+
+        p {
+            color: #222;
+        }
     </style>
 </head>
 
