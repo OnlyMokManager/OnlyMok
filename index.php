@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $connectedPassword = $user['password'];
 
             if ($password === $connectedPassword) {
-                $_SESSION['gebruiker'] = $username;
+                $_SESSION['user'] = $username;
                 header('Location: /shop.html');
                 exit();
             }
