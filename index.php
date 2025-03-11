@@ -14,6 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Check the database connection
+    if ($connect) {
+        echo 'Database connection successful.<br>';
+    } else {
+        echo 'Database connection failed.<br>';
+        exit();
+    }
+
     // Prepare and execute the SQL query to fetch the user data based on the username
     $sql = 'SELECT id, username, password FROM users WHERE username = :username';
     $user = $connect->prepare($sql);
