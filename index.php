@@ -14,25 +14,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Prepare and execute the SQL query to fetch the user data based on the username and password
-    $sql = 'SELECT id, username, password FROM users WHERE username = :username AND password = :password';
+    // Prepare and execute the SQL query to fetch the user data based on the username
+    $sql = 'SELECT id, username, password FROM users WHERE username = :username';
     $user = $connect->prepare($sql);
-    $user->execute(['username' => $username, 'password' => $password]);
+    $user->execute(['username' => $username]);
 
     // Print the executed SQL query for debugging
     echo 'Executed SQL query: ' . $sql . '<br>';
-    echo 'With parameters: username=' . $username . ', password=' . $password . '<br>';
+    echo 'With parameters: username=' . $username . '<br>';
 
     // Check if the query returned any results
     if ($user->rowCount() > 0) {
         $userData = $user->fetch(PDO::FETCH_ASSOC);
         echo 'User data fetched successfully.<br>';
         var_dump($userData);
-        $_SESSION['user'] = $userData['id'];
-        header('Location: /shop.html');
-        exit();
+
+        // Check if the provided password matches the stored password
+        if ($password === $userData['password']) {
+            echo 'Password is correct.<br>';
+            $_SESSION['user'] = $userData['id'];
+            header('Location: /shop.html');
+            exit();
+        } else {
+            echo 'Invalid password.<br>';
+        }
     } else {
-        echo 'Invalid username or password.<br>';
+        echo 'Invalid username.<br>';
     }
 }
 ?>
