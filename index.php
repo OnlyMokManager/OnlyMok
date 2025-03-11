@@ -3,51 +3,34 @@ require 'db.connect.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    echo 'Username: ' . $username . '<br>';
-    echo 'Password: ' . $password . '<br>';
+    $success = '';
 
-    // Check if the username and password are not empty
-    if (empty($username) || empty($password)) {
-        echo 'Username or password is empty.<br>';
-        exit();
-    }
+    if (isset($_POST['login'])) {
+        $naam = $_POST['innaam'];
+        $wachtwoord = $_POST['inwachtwoord'];
 
-    // Check the database connection
-    if ($connect) {
-        echo 'Database connection successful.<br>';
-    } else {
-        echo 'Database connection failed.<br>';
-        exit();
-    }
+        $db = maakVerbinding();
+        $sql = 'SELECT password FROM [User] WHERE username = :naam';
+        $query = $db->prepare($sql);
 
-    // Prepare and execute the SQL query to fetch the user data based on the username
-    $sql = 'SELECT id, username, password FROM users WHERE username = :username';
-    $user = $connect->prepare($sql);
-    $user->execute(['username' => $username]);
+        $data_array = [
+            ':naam' => htmlspecialchars($naam)
+        ];
+        $query->execute($data_array);
 
-    // Print the executed SQL query for debugging
-    echo 'Executed SQL query: ' . $sql . '<br>';
-    echo 'With parameters: username=' . $username . '<br>';
+        if ($rij = $query->fetch()) {
+            $passwordhash = $rij['password'];
 
-    // Check if the query returned any results
-    if ($user->rowCount() > 0) {
-        $userData = $user->fetch(PDO::FETCH_ASSOC);
-        echo 'User data fetched successfully.<br>';
-        var_dump($userData);
+            if (password_verify($wachtwoord, $passwordhash)) {
 
-        // Check if the provided password matches the stored password
-        if ($password === $userData['password']) {
-            echo 'Password is correct.<br>';
-            $_SESSION['user'] = $userData['id'];
-            header('Location: /shop.html');
-            exit();
+                $_SESSION['gebruiker'] = $naam;
+                $success = 'Gebruiker is ingelogd.';
+            } else {
+                $success = 'Fout: onjuiste inloggegevens!';
+            }
         } else {
-            echo 'Invalid password.<br>';
+            $success = 'Onjuiste inloggegevens.';
         }
-    } else {
-        echo 'Invalid username.<br>';
     }
 }
 ?>
