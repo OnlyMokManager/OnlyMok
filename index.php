@@ -1,34 +1,3 @@
-<?php
-require 'db.connect.php';
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['login'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $db = startConnection();
-        $sql = 'SELECT username, [password] FROM [Users] WHERE username = :username';
-        $query = $db->prepare($sql);
-
-        $data_array = [
-            ':username' => htmlspecialchars($username)
-        ];
-        $query->execute($data_array);
-
-        if ($user = $query->fetch()) {
-            $connectedPassword = $user['password'];
-
-            if ($password === $connectedPassword) {
-                $_SESSION['user'] = $username;
-                header('Location: /shop.html');
-                exit();
-            }
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button class="login-button" type="submit" name="login">Login</button>
         </form>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.querySelector(".login-form");
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                // Simple "dumb people protection" check
+                if (username === "skibidi" && password === "toilet") {
+                    window.location.href = "shop.html";
+                }
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
+
